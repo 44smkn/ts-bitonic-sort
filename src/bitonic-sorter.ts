@@ -3,7 +3,7 @@
  * @param x array
  * @param up sort order
  */
-export function sort(x: number[], up: boolean): number[] {
+export function sort<T>(x: T[], up: boolean): T[] {
     if (x.length === 1) {
         return x
     }
@@ -13,7 +13,7 @@ export function sort(x: number[], up: boolean): number[] {
     return subSort(first.concat(second), up);
 }
 
-function subSort(x: number[], up: boolean): number[] {
+function subSort<T>(x: T[], up: boolean): T[] {
     if (x.length === 1) {
         return x
     }
@@ -24,7 +24,7 @@ function subSort(x: number[], up: boolean): number[] {
     return first.concat(second)
 }
 
-function compareAndSwap(x: number[], up: boolean): void {
+function compareAndSwap<T>(x: T[], up: boolean): void {
     let midPoint = x.length / 2;
     for (const i of Array.from(Array(midPoint).keys())) {
         if ((x[i] > x[midPoint + i]) === up) {

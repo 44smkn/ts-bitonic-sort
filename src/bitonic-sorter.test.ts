@@ -1,17 +1,17 @@
-import { sort } from "./bitonic-sorter";
+import { sort, SortOrder } from "./bitonic-sorter";
 
 describe('bitonic sort numbers', () => {
     const tests = [
         {
             name: "Sort number in ascending order",
             x: [10, 30, 11, 20, 4, 330, 21, 110],
-            up: true,
+            up: SortOrder.Ascending,
             want: [4, 10, 11, 20, 21, 30, 110, 330]
         },
         {
             name: "Sort number in descending order",
             x: [10, 30, 11, 20, 4, 330, 21, 110],
-            up: false,
+            up: SortOrder.Descending,
             want: [330, 110, 30, 21, 20, 11, 10, 4]
         }
     ];
@@ -28,14 +28,14 @@ describe('bitonic sort strings', () => {
         {
             name: "Sort string in ascending order",
             x: ["Rust", "is", "fast", "and", "memoryefficient", "with", "no", "GC"],
-            up: true,
+            up: SortOrder.Ascending,
             want: ["GC", "Rust", "and", "fast", "is", "memoryefficient", "no", "with"]
         },
         {
             name: "Sort string in descending order",
             x: ["Rust", "is", "fast", "and", "memoryefficient", "with", "no", "GC"],
-            up: true,
-            want: ["GC", "Rust", "and", "fast", "is", "memoryefficient", "no", "with"]
+            up: SortOrder.Descending,
+            want: ["with", "no", "memoryefficient", "is", "fast", "and", "Rust", "GC"]
         }
     ];
 

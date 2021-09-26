@@ -3,13 +3,23 @@ export enum SortOrder {
     Descending,
 }
 
-export function sort<T>(x: T[], order: SortOrder): T[] {
+export function sort<T>(x: T[], order: SortOrder, callback: (e?: Error) => any): T[] {
+    if (!isPowerOfTwo(x.length)) {
+        return callback(new Error(`The length of x is not a power of two. (x.length:${x.length})`));
+    }
     switch (order) {
         case SortOrder.Ascending:
             return do_sort(x, true);
         case SortOrder.Descending:
             return do_sort(x, false);
     }
+}
+
+function isPowerOfTwo(x: number): boolean {
+    if (x === 0) {
+        return false;
+    }
+    return (x & (x - 1)) === 0;
 }
 
 /**

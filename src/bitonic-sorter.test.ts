@@ -13,12 +13,18 @@ describe('bitonic sort numbers', () => {
             x: [10, 30, 11, 20, 4, 330, 21, 110],
             up: SortOrder.Descending,
             want: [330, 110, 30, 21, 20, 11, 10, 4]
+        },
+        {
+            name: "sort numbers that not have power of two elements",
+            x: [10, 30, 11, 20, 4, 330, 21],
+            up: SortOrder.Descending,
+            want: "The length of x is not a power of two. (x.length:7)"
         }
     ];
 
     for (const t of tests) {
         test(t.name, () => {
-            expect(sort(t.x, t.up)).toStrictEqual(t.want)
+            expect(sort(t.x, t.up, (e) => { return e?.message })).toStrictEqual(t.want)
         })
     }
 })
@@ -41,7 +47,7 @@ describe('bitonic sort strings', () => {
 
     for (const t of tests) {
         test(t.name, () => {
-            expect(sort(t.x, t.up)).toStrictEqual(t.want)
+            expect(sort(t.x, t.up, (e) => { return e?.message })).toStrictEqual(t.want)
         })
     }
 })

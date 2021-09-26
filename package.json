@@ -1,0 +1,25 @@
+{
+  "name": "ts-bitonic-sort",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p .",
+    "start": "npm run build && node lib/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/44smkn/ts-bitonic-sort.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/44smkn/ts-bitonic-sort/issues"
+  },
+  "homepage": "https://github.com/44smkn/ts-bitonic-sort#readme",
+  "devDependencies": {
+    "@types/node": "^16.10.1",
+    "typescript": "^4.4.3"
+  }
+}

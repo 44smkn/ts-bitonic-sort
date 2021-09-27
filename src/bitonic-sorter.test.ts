@@ -1,4 +1,4 @@
-import { sort, SortOrder } from "./bitonic-sorter";
+import { sort, SortOrder, sortBy, Ordering } from "./bitonic-sorter";
 
 describe('bitonic sort numbers', () => {
     const tests = [
@@ -48,6 +48,38 @@ describe('bitonic sort strings', () => {
     for (const t of tests) {
         test(t.name, () => {
             expect(sort(t.x, t.up, (e) => { return e?.message })).toStrictEqual(t.want)
+        })
+    }
+})
+
+class Student {
+    firstName: string;
+    lastName: string;
+    age: number;
+    constructor(firstName: string, lastName: string, age: number) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
+}
+
+describe('bitonic sort objects', () => {
+    let taro = new Student("Taro", "Yamada", 16);
+    let hanako = new Student("Hanako", "Yamada", 14);
+    let kyoko = new Student("Kyoko", "Ito", 15);
+    let ryosuke = new Student("Ryosuke", "Hayashi", 17);
+    const tests = [
+        {
+            name: "Sort student objects in ascending order",
+            x: [taro, hanako, kyoko, ryosuke],
+            up: SortOrder.Ascending,
+            want: [hanako, kyoko, taro, ryosuke]
+        },
+    ];
+
+    for (const t of tests) {
+        test(t.name, () => {
+            expect(sortBy(t.x, (a: Student, b: Student) => { return a.age > b.age ? Ordering.Greater : Ordering.Less }, (e) => { return e?.message })).toStrictEqual(t.want)
         })
     }
 })

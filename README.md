@@ -32,3 +32,17 @@ Update `jest.config.ts`
     "^.+\\.(ts|tsx)$": "ts-jest"
   },
 ```
+
+## Task description
+
+- Implement simple bitonic sort functions
+  - Know How to define function and variables
+- Write unit test
+  - Know unit test library
+- Use generics for sorting both numbers and strings
+- Improve redability with SortOrder enum
+  - `switch` syntax
+- Add error handling with a callback function
+- Pass comparator function to allow to sort
+  - Define `Student` class
+- Call sort function asynchronously

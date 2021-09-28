@@ -8,7 +8,7 @@ export enum Ordering {
     Less
 }
 
-export function sort<T>(x: T[], order: SortOrder, callback: (e?: Error) => any): T[] {
+export async function sort<T>(x: T[], order: SortOrder, callback: (e?: Error) => any): Promise<T[]> {
     switch (order) {
         case SortOrder.Ascending:
             return sortBy(x, (a: T, b: T) => { return a > b ? Ordering.Greater : Ordering.Less }, callback);
@@ -17,11 +17,11 @@ export function sort<T>(x: T[], order: SortOrder, callback: (e?: Error) => any):
     }
 }
 
-export function sortBy<T>(x: T[], comparator: (one: T, another: T) => Ordering, callback: (e?: Error) => any): T[] {
+export function sortBy<T>(x: T[], comparator: (one: T, another: T) => Ordering, callback: (e?: Error) => any): Promise<T[]> {
     if (!isPowerOfTwo(x.length)) {
         return callback(new Error(`The length of x is not a power of two. (x.length:${x.length})`));
     }
-    return do_sort(x, true, comparator)
+    return do_sort(x, true, comparator);
 }
 
 function isPowerOfTwo(x: number): boolean {
@@ -36,24 +36,22 @@ function isPowerOfTwo(x: number): boolean {
  * @param x array
  * @param up sort order
  */
-function do_sort<T>(x: T[], forward: boolean, comparator: (one: T, another: T) => Ordering): T[] {
+async function do_sort<T>(x: T[], forward: boolean, comparator: (one: T, another: T) => Ordering): Promise<T[]> {
     if (x.length === 1) {
         return x
     }
-    let midPoint = x.length / 2;
-    let first = do_sort(x.slice(0, midPoint), true, comparator);
-    let second = do_sort(x.slice(midPoint, x.length), false, comparator);
+    const midPoint = x.length / 2;
+    const [first, second] = await Promise.all([do_sort(x.slice(0, midPoint), true, comparator), do_sort(x.slice(midPoint, x.length), false, comparator)]);
     return subSort(first.concat(second), forward, comparator);
 }
 
-function subSort<T>(x: T[], forward: boolean, comparator: (one: T, another: T) => Ordering): T[] {
+async function subSort<T>(x: T[], forward: boolean, comparator: (one: T, another: T) => Ordering): Promise<T[]> {
     if (x.length === 1) {
         return x
     }
     compareAndSwap(x, forward, comparator);
-    let midPoint = x.length / 2;
-    let first = subSort(x.slice(0, midPoint), forward, comparator);
-    let second = subSort(x.slice(midPoint, x.length), forward, comparator);
+    const midPoint = x.length / 2;
+    const [first, second] = await Promise.all([subSort(x.slice(0, midPoint), forward, comparator), subSort(x.slice(midPoint, x.length), forward, comparator)]);
     return first.concat(second)
 }
 

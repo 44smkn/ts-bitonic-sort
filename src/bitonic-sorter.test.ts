@@ -24,7 +24,9 @@ describe('bitonic sort numbers', () => {
 
     for (const t of tests) {
         test(t.name, () => {
-            expect(sort(t.x, t.up, (e) => { return e?.message })).toStrictEqual(t.want)
+            sort(t.x, t.up, (e) => { return e?.message }).then(got => {
+                expect(got).toStrictEqual(t.want)
+            })
         })
     }
 })
@@ -47,7 +49,9 @@ describe('bitonic sort strings', () => {
 
     for (const t of tests) {
         test(t.name, () => {
-            expect(sort(t.x, t.up, (e) => { return e?.message })).toStrictEqual(t.want)
+            sort(t.x, t.up, (e) => { return e?.message }).then(got => {
+                expect(got).toStrictEqual(t.want)
+            });
         })
     }
 })
@@ -79,7 +83,8 @@ describe('bitonic sort objects', () => {
 
     for (const t of tests) {
         test(t.name, () => {
-            expect(sortBy(t.x, (a: Student, b: Student) => { return a.age > b.age ? Ordering.Greater : Ordering.Less }, (e) => { return e?.message })).toStrictEqual(t.want)
+            sortBy(t.x, (a: Student, b: Student) => { return a.age > b.age ? Ordering.Greater : Ordering.Less }, (e) => { return e?.message })
+                .then(got => { expect(got).toStrictEqual(t.want) });
         })
     }
 })

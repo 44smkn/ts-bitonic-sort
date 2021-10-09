@@ -17,6 +17,9 @@ The following questions will help Jest to create a suitable configuration for yo
 ✔ Do you want Jest to add coverage reports? … no
 ✔ Which provider should be used to instrument code for coverage? › v8
 ✔ Automatically clear mock calls and instances between every test? … no
+
+$ npm i --save benchmark
+$ npm i --save-dev @types/benchmark
 ```
 
 Update `jest.config.ts`
@@ -46,3 +49,9 @@ Update `jest.config.ts`
 - Pass comparator function to allow to sort
   - Define `Student` class
 - Call sort function asynchronously
+
+## Benchmark
+
+```sh
+$ npm run benchmark
+```

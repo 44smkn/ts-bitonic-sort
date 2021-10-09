@@ -6,7 +6,7 @@ benchmark();
 
 function benchmark(): void {
     let suite = new Suite;
-    let x = generateRandomNumberArray(16384, 0, 1000000);
+    let x = generateRandomNumberArray(65536, 0, 1000000);
     let y = Array.from(x);
     suite
         .add("seq sort", () => {

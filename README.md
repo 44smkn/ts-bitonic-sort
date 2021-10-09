@@ -54,4 +54,7 @@ Update `jest.config.ts`
 
 ```sh
 $ npm run benchmark
+seq sort x 1.57 ops/sec ±3.06% (8 runs sampled)
+concurrent sort x 1.12 ops/sec ±56.14% (9 runs sampled)
+Faster is seq sort,concurrent sort
 ```
